@@ -33,14 +33,14 @@ function App() {
         {/* Catalog of Services with Detail Popups */}
         <Services />
 
-        {/* Responsive Masonry Portfolio Gallery with Lightbox */}
-        <Portfolio />
+        {/* Premium Product Showcase / Shop Section */}
+        <ProductShowcase />
 
         {/* Quality Value Prepositions */}
         <WhyChooseUs />
 
-        {/* Premium Product Showcase / Shop Section */}
-        <ProductShowcase />
+        {/* Responsive Masonry Portfolio Gallery with Lightbox */}
+        <Portfolio />
 
         {/* Client Bride Reviews Slider */}
         <Testimonials />

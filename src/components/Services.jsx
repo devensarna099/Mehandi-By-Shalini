@@ -123,13 +123,13 @@ const Services = () => {
         </div>
 
         {/* Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-2 gap-3 md:grid-cols-2 lg:grid-cols-4 md:gap-8">
           {servicesData.map((service, index) => {
             const Icon = service.icon;
             return (
               <motion.div
                 key={service.id}
-                className="bg-white rounded-3xl border border-beige-soft/40 p-6 flex flex-col justify-between hover:shadow-xl hover:shadow-mehndi-green/5 hover:-translate-y-1 transition-all duration-300 group"
+                className="bg-white rounded-3xl border border-beige-soft/40 p-4 md:p-6 flex flex-col justify-between hover:shadow-xl hover:shadow-mehndi-green/5 hover:-translate-y-1 transition-all duration-300 group h-full"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
@@ -137,17 +137,17 @@ const Services = () => {
               >
                 <div>
                   {/* Icon Area */}
-                  <div className="w-12 h-12 rounded-2xl bg-beige-soft/20 text-gold-accent flex items-center justify-center mb-6 group-hover:bg-gold-accent group-hover:text-white transition-all duration-300">
-                    <Icon className="w-6 h-6" />
+                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-2xl bg-beige-soft/20 text-gold-accent flex items-center justify-center mb-4 md:mb-6 group-hover:bg-gold-accent group-hover:text-white transition-all duration-300">
+                    <Icon className="w-5 h-5 md:w-6 md:h-6" />
                   </div>
                   
                   {/* Title */}
-                  <h3 className="font-serif text-xl font-bold text-mehndi-dark mb-3">
+                  <h3 className="font-serif text-base md:text-xl font-bold text-mehndi-dark mb-2 md:mb-3">
                     {service.title}
                   </h3>
                   
                   {/* Description */}
-                  <p className="font-sans text-sm text-gray-500 leading-relaxed mb-6">
+                  <p className="font-sans text-xs sm:text-sm text-gray-500 leading-relaxed mb-4 md:mb-6 line-clamp-3 md:line-clamp-none">
                     {service.shortDesc}
                   </p>
                 </div>

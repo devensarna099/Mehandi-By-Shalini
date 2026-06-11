@@ -67,33 +67,33 @@ const WhyChooseUs = () => {
         </div>
 
         {/* Feature Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-2 gap-3 md:grid-cols-2 lg:grid-cols-3 md:gap-8">
           {reasons.map((reason, index) => {
             const Icon = reason.icon;
             return (
               <motion.div
                 key={reason.title}
-                className="relative bg-[#FAF8F5] rounded-3xl p-8 border border-beige-soft/30 hover:border-gold-accent/40 shadow-sm hover:shadow-lg transition-all duration-300 group"
+                className="relative bg-[#FAF8F5] rounded-3xl p-4 md:p-8 border border-beige-soft/30 hover:border-gold-accent/40 shadow-sm hover:shadow-lg transition-all duration-300 group flex flex-col items-center text-center md:items-start md:text-left h-full"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.5, delay: index * 0.05 }}
               >
                 {/* Thin top border indicator */}
-                <div className="absolute top-0 left-8 right-8 h-1 bg-gold-gradient rounded-b-full scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+                <div className="absolute top-0 left-4 right-4 md:left-8 md:right-8 h-1 bg-gold-gradient rounded-b-full scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
 
                 {/* Icon Wrapper */}
-                <div className="w-12 h-12 rounded-2xl bg-white text-gold-accent flex items-center justify-center mb-6 shadow-sm border border-beige-soft/20 group-hover:scale-110 group-hover:bg-gold-gradient group-hover:text-white transition-all duration-300">
-                  <Icon className="w-6 h-6" />
+                <div className="w-10 h-10 md:w-12 md:h-12 rounded-2xl bg-white text-gold-accent flex items-center justify-center mb-4 md:mb-6 shadow-sm border border-beige-soft/20 group-hover:scale-110 group-hover:bg-gold-gradient group-hover:text-white transition-all duration-300">
+                  <Icon className="w-5 h-5 md:w-6 md:h-6" />
                 </div>
 
                 {/* Title */}
-                <h3 className="font-serif text-lg font-bold text-mehndi-dark mb-3">
+                <h3 className="font-serif text-base md:text-lg font-bold text-mehndi-dark mb-2 md:mb-3">
                   {reason.title}
                 </h3>
 
                 {/* Description */}
-                <p className="font-sans text-sm text-gray-500 leading-relaxed">
+                <p className="font-sans text-xs sm:text-sm text-gray-500 leading-relaxed">
                   {reason.desc}
                 </p>
               </motion.div>

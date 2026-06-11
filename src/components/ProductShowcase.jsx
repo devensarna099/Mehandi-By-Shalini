@@ -126,7 +126,7 @@ const ProductShowcase = () => {
         {/* Products Grid */}
         <motion.div 
           layout
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"
+          className="grid grid-cols-2 gap-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:gap-8"
         >
           <AnimatePresence mode="popLayout">
             {filteredProducts.map((product) => (
@@ -137,7 +137,7 @@ const ProductShowcase = () => {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.9 }}
                 transition={{ duration: 0.4 }}
-                className="bg-white rounded-3xl border border-beige-soft/40 overflow-hidden shadow-sm hover:shadow-xl hover:shadow-mehndi-green/5 transition-all duration-300 group flex flex-col h-full"
+                className="bg-white rounded-2xl md:rounded-3xl border border-beige-soft/40 overflow-hidden shadow-sm hover:shadow-xl hover:shadow-mehndi-green/5 transition-all duration-300 group flex flex-col h-full"
               >
                 {/* 1:1 Image Container */}
                 <div className="relative aspect-square w-full overflow-hidden bg-beige-soft/10">
@@ -145,12 +145,12 @@ const ProductShowcase = () => {
                     src={product.image}
                     alt={product.name}
                     loading="lazy"
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    className="w-full h-full object-cover transition-transform duration-500 md:group-hover:scale-110"
                   />
 
-                  {/* Premium Hover Glassmorphic Overlay */}
-                  <div className="absolute inset-0 bg-mehndi-dark/75 backdrop-blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center p-6 text-center text-white">
-                    <Sparkles className="w-6 h-6 text-gold-accent mx-auto mb-3 transform -translate-y-2 group-hover:translate-y-0 transition-transform duration-500 delay-100" />
+                  {/* Premium Hover Glassmorphic Overlay (desktop only) */}
+                  <div className="absolute inset-0 bg-mehndi-dark/75 backdrop-blur-md opacity-0 md:group-hover:opacity-100 transition-opacity duration-300 hidden md:flex flex-col justify-center p-6 text-center text-white">
+                    <Sparkles className="w-6 h-6 text-gold-accent mx-auto mb-3 transform -translate-y-2 md:group-hover:translate-y-0 transition-transform duration-500 delay-100" />
                     <p className="font-sans text-sm leading-relaxed mb-2 opacity-95">
                       {product.hoverDesc}
                     </p>
@@ -161,24 +161,24 @@ const ProductShowcase = () => {
                 </div>
 
                 {/* Product Information */}
-                <div className="p-6 flex flex-col flex-grow">
-                  <div className="mb-4">
-                    <span className="text-[10px] font-sans font-extrabold uppercase tracking-widest text-gold-accent mb-1 block">
+                <div className="p-3 md:p-6 flex flex-col flex-grow">
+                  <div className="mb-2 md:mb-4">
+                    <span className="text-[8px] md:text-[10px] font-sans font-extrabold uppercase tracking-widest text-gold-accent mb-1 block">
                       {product.category}
                     </span>
-                    <h3 className="font-serif text-lg font-bold text-mehndi-dark group-hover:text-mehndi-green transition-colors duration-200 line-clamp-1">
+                    <h3 className="font-serif text-sm md:text-lg font-bold text-mehndi-dark group-hover:text-mehndi-green transition-colors duration-200 line-clamp-1">
                       {product.name}
                     </h3>
                   </div>
 
-                  <p className="font-sans text-sm text-gray-500 leading-relaxed mb-6 flex-grow line-clamp-2">
+                  <p className="font-sans text-xs md:text-sm text-gray-500 leading-relaxed mb-3 md:mb-6 flex-grow line-clamp-2">
                     {product.tagline}
                   </p>
 
-                  <div className="flex items-center justify-between mt-auto pt-4 border-t border-beige-soft/20">
-                    <div className="flex flex-col">
-                      <span className="text-xs text-gray-400 font-sans">Price</span>
-                      <span className="font-sans text-xl font-bold text-mehndi-dark">
+                  <div className="flex flex-col md:flex-row md:items-center md:justify-between mt-auto pt-3 md:pt-4 border-t border-beige-soft/20 gap-3">
+                    <div className="flex justify-between items-center md:flex-col md:items-start">
+                      <span className="text-[10px] md:text-xs text-gray-400 font-sans">Price</span>
+                      <span className="font-sans text-base md:text-xl font-bold text-mehndi-dark">
                         ₹{product.price}
                       </span>
                     </div>
@@ -187,9 +187,9 @@ const ProductShowcase = () => {
                       href={getWhatsAppLink(product.name)}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 bg-mehndi-green hover:bg-gold-gradient text-white hover:text-white px-5 py-2.5 rounded-full font-sans text-sm font-semibold shadow-md active:scale-95 transition-all duration-300"
+                      className="w-full md:w-auto inline-flex items-center justify-center gap-2 bg-mehndi-green hover:bg-gold-gradient text-white hover:text-white px-4 py-2 md:px-5 md:py-2.5 rounded-full font-sans text-xs md:text-sm font-semibold shadow-md active:scale-95 transition-all duration-300"
                     >
-                      <ShoppingBag className="w-4 h-4" />
+                      <ShoppingBag className="w-3.5 h-3.5 md:w-4 md:h-4" />
                       Buy Now
                     </a>
                   </div>

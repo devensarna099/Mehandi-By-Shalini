@@ -113,25 +113,25 @@ const Portfolio = () => {
           ))}
         </div>
 
-        {/* Masonry Columns Layout */}
+        {/* Responsive Grid Layout */}
         <motion.div 
           layout
-          className="columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6"
+          className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4 md:gap-6"
         >
           <AnimatePresence mode="popLayout">
             {filteredItems.map((item, index) => (
               <motion.div
                 key={item.id}
                 layoutId={`portfolio-item-${item.id}`}
-                className="break-inside-avoid relative overflow-hidden rounded-[2rem] bg-white border border-beige-soft/30 shadow-md group cursor-pointer"
+                className="relative overflow-hidden rounded-2xl md:rounded-[2rem] bg-white border border-beige-soft/30 shadow-md group cursor-pointer"
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.9 }}
                 transition={{ duration: 0.4 }}
                 onClick={() => openLightbox(index)}
               >
-                {/* Image Wrap */}
-                <div className={`relative w-full ${item.aspect} overflow-hidden`}>
+                {/* Image Wrap - 1:1 square ratio for consistent heights */}
+                <div className="relative w-full aspect-square overflow-hidden">
                   <img 
                     src={item.img} 
                     alt={item.title}
@@ -140,16 +140,16 @@ const Portfolio = () => {
                   />
                   
                   {/* Hover Overlay */}
-                  <div className="absolute inset-0 bg-mehndi-dark/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-between p-6">
-                    <span className="self-end bg-gold-gradient text-white text-[10px] font-bold tracking-wider uppercase px-3 py-1 rounded-full">
+                  <div className="absolute inset-0 bg-mehndi-dark/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-between p-4 md:p-6">
+                    <span className="self-end bg-gold-gradient text-white text-[8px] md:text-[10px] font-bold tracking-wider uppercase px-2 md:px-3 py-0.5 md:py-1 rounded-full">
                       {item.category}
                     </span>
                     
-                    <div className="space-y-2">
-                      <div className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center text-white mb-2 mx-auto">
-                        <Eye className="w-5 h-5" />
+                    <div className="space-y-1 md:space-y-2">
+                      <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center text-white mb-1 md:mb-2 mx-auto">
+                        <Eye className="w-4 h-4 md:w-5 md:h-5" />
                       </div>
-                      <h3 className="font-serif text-lg font-bold text-white text-center">
+                      <h3 className="font-serif text-sm md:text-lg font-bold text-white text-center leading-snug">
                         {item.title}
                       </h3>
                     </div>
