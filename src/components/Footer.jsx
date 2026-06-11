@@ -96,7 +96,7 @@ const Footer = () => {
                 <FacebookIcon className="w-4.5 h-4.5" />
               </a>
               <a 
-                href="https://wa.me/919876543210" 
+                href="https://wa.me/919074011621" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="w-9 h-9 rounded-full bg-white/10 text-white flex items-center justify-center hover:bg-gold-gradient hover:scale-110 transition-all duration-300"

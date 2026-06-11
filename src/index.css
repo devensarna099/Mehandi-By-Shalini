@@ -7,7 +7,7 @@
   --color-mehndi-dark: #2C3E2D;
   --color-gold-accent: #D4AF37;
   --color-gold-light: #F3E5AB;
-  
+
   --font-serif: "Playfair Display", Georgia, serif;
   --font-sans: "Outfit", Inter, system-ui, sans-serif;
 }
@@ -19,7 +19,8 @@ html {
 
 body {
   font-family: var(--font-sans);
-  background-color: #FDFAF6; /* Milky white background for a luxury feel */
+  background-color: #FDFAF6;
+  /* Milky white background for a luxury feel */
   color: #333333;
   overflow-x: hidden;
 }
@@ -41,13 +42,13 @@ body {
 
 /* Custom Gold Gradient borders & text */
 .text-gold-gradient {
-  background: linear-gradient(135deg, #BF953F 0%, #FCF6BA 25%, #B38728 50%, #FBF5B7 75%, #AA771C 100%);
+  background: linear-gradient(135deg, #BF953F 0%, #dbd371 30%, #B38728 50%, #dbd371 75%, #AA771C 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .bg-gold-gradient {
-  background: linear-gradient(135deg, #BF953F 0%, #FCF6BA 30%, #B38728 70%, #AA771C 100%);
+  background: linear-gradient(135deg, #BF953F 0%, #dbd371 30%, #B38728 70%, #AA771C 100%);
 }
 
 .border-gold {
@@ -88,6 +89,6 @@ body {
   background-clip: padding-box;
 }
 
-.masonry-grid_column > div {
+.masonry-grid_column>div {
   margin-bottom: 1.5rem;
 }

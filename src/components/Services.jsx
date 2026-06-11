@@ -243,7 +243,7 @@ const Services = () => {
                   Book Service
                 </a>
                 <a
-                  href={`https://wa.me/919876543210?text=I'm%20interested%20in%20your%20${encodeURIComponent(selectedService.title)}%20service`}
+                  href={`https://wa.me/919074011621?text=I'm%20interested%20in%20your%20${encodeURIComponent(selectedService.title)}%20service`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex-1 border-2 border-mehndi-green/30 text-mehndi-green hover:border-mehndi-green text-center py-3 rounded-full font-sans text-sm font-semibold active:scale-95 transition-transform"

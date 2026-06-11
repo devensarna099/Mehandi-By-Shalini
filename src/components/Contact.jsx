@@ -11,7 +11,7 @@ const Contact = () => {
     service: 'Bridal Mehndi',
     message: ''
   });
-  
+
   const [submitted, setSubmitted] = useState(false);
 
   const handleChange = (e) => {
@@ -47,14 +47,14 @@ const Contact = () => {
 
   const handleWhatsAppDirect = () => {
     const textMsg = `Hi Shalini, I am writing to inquire about a booking.\n\nName: ${formData.name}\nPhone: ${formData.phone}\nEvent Date: ${formData.date}\nLocation: ${formData.location}\nService: ${formData.service}\nMessage: ${formData.message}`;
-    const url = `https://wa.me/919876543210?text=${encodeURIComponent(textMsg)}`;
+    const url = `https://wa.me/919074011621?text=${encodeURIComponent(textMsg)}`;
     window.open(url, '_blank');
   };
 
   return (
     <section id="contact" className="py-20 bg-white relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
           <span className="font-sans text-xs font-bold tracking-widest text-gold-accent uppercase mb-2 block">
@@ -72,12 +72,12 @@ const Contact = () => {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-          
+
           {/* Contact Details & Map (Left Column) */}
           <div className="lg:col-span-5 space-y-8">
             <div className="bg-[#FAF8F5] rounded-[2rem] p-8 border border-beige-soft/30 space-y-6">
               <h3 className="font-serif text-2xl font-bold text-mehndi-dark">Get In Touch</h3>
-              
+
               <div className="space-y-4">
                 <div className="flex items-start gap-4">
                   <div className="w-10 h-10 rounded-xl bg-gold-accent/15 text-gold-accent flex items-center justify-center flex-shrink-0">
@@ -113,13 +113,13 @@ const Contact = () => {
 
             {/* Google Maps Embed */}
             <div className="rounded-[2rem] overflow-hidden border border-beige-soft/30 shadow-md h-64 relative">
-              <iframe 
+              <iframe
                 title="Mehandi by Shalini Location Map"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14008.204561081519!2d77.11181653896582!3d28.62822295627255!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d04aa65c82ebf%3A0xb35a396ec09ad5e2!2sRajouri%20Garden%2C%20New%20Delhi%2C%20Delhi!5e0!3m2!1sen!2sin!4v1717890000000!5m2!1sen!2sin" 
-                width="100%" 
-                height="100%" 
-                style={{ border: 0 }} 
-                allowFullScreen="" 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14008.204561081519!2d77.11181653896582!3d28.62822295627255!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d04aa65c82ebf%3A0xb35a396ec09ad5e2!2sRajouri%20Garden%2C%20New%20Delhi%2C%20Delhi!5e0!3m2!1sen!2sin!4v1717890000000!5m2!1sen!2sin"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen=""
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
               ></iframe>
@@ -130,7 +130,7 @@ const Contact = () => {
           <div className="lg:col-span-7">
             <div className="glass p-8 sm:p-10 rounded-[2.5rem] border border-beige-soft/40 shadow-lg relative">
               {submitted ? (
-                <motion.div 
+                <motion.div
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
                   className="text-center py-12 space-y-4"
@@ -144,9 +144,9 @@ const Contact = () => {
                   </p>
                 </motion.div>
               ) : (
-                <form 
-                  name="contact" 
-                  method="POST" 
+                <form
+                  name="contact"
+                  method="POST"
                   data-netlify="true"
                   onSubmit={handleSubmit}
                   className="space-y-6"
@@ -158,13 +158,13 @@ const Contact = () => {
                     {/* Name */}
                     <div className="space-y-1.5">
                       <label htmlFor="name" className="block text-xs font-semibold text-gray-500 uppercase tracking-wider font-sans">Full Name</label>
-                      <input 
-                        type="text" 
-                        id="name" 
-                        name="name" 
-                        value={formData.name} 
+                      <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        value={formData.name}
                         onChange={handleChange}
-                        required 
+                        required
                         placeholder="e.g., Deepika Padukone"
                         className="w-full px-4 py-3.5 bg-[#FAF8F5] border border-beige-soft/40 rounded-xl font-sans text-sm focus:outline-none focus:border-gold-accent focus:bg-white transition-colors"
                       />
@@ -173,13 +173,13 @@ const Contact = () => {
                     {/* Phone */}
                     <div className="space-y-1.5">
                       <label htmlFor="phone" className="block text-xs font-semibold text-gray-500 uppercase tracking-wider font-sans">Phone Number</label>
-                      <input 
-                        type="tel" 
-                        id="phone" 
-                        name="phone" 
-                        value={formData.phone} 
+                      <input
+                        type="tel"
+                        id="phone"
+                        name="phone"
+                        value={formData.phone}
                         onChange={handleChange}
-                        required 
+                        required
                         placeholder="e.g., +91 98765 43210"
                         className="w-full px-4 py-3.5 bg-[#FAF8F5] border border-beige-soft/40 rounded-xl font-sans text-sm focus:outline-none focus:border-gold-accent focus:bg-white transition-colors"
                       />
@@ -190,13 +190,13 @@ const Contact = () => {
                     {/* Event Date */}
                     <div className="space-y-1.5">
                       <label htmlFor="date" className="block text-xs font-semibold text-gray-500 uppercase tracking-wider font-sans">Event Date</label>
-                      <input 
-                        type="date" 
-                        id="date" 
-                        name="date" 
-                        value={formData.date} 
+                      <input
+                        type="date"
+                        id="date"
+                        name="date"
+                        value={formData.date}
                         onChange={handleChange}
-                        required 
+                        required
                         className="w-full px-4 py-3.5 bg-[#FAF8F5] border border-beige-soft/40 rounded-xl font-sans text-sm focus:outline-none focus:border-gold-accent focus:bg-white transition-colors"
                       />
                     </div>
@@ -204,10 +204,10 @@ const Contact = () => {
                     {/* Service Required */}
                     <div className="space-y-1.5">
                       <label htmlFor="service" className="block text-xs font-semibold text-gray-500 uppercase tracking-wider font-sans">Required Service</label>
-                      <select 
-                        id="service" 
-                        name="service" 
-                        value={formData.service} 
+                      <select
+                        id="service"
+                        name="service"
+                        value={formData.service}
                         onChange={handleChange}
                         className="w-full px-4 py-3.5 bg-[#FAF8F5] border border-beige-soft/40 rounded-xl font-sans text-sm focus:outline-none focus:border-gold-accent focus:bg-white transition-colors appearance-none cursor-pointer"
                       >
@@ -226,13 +226,13 @@ const Contact = () => {
                   {/* Location */}
                   <div className="space-y-1.5">
                     <label htmlFor="location" className="block text-xs font-semibold text-gray-500 uppercase tracking-wider font-sans">Location / Venue</label>
-                    <input 
-                      type="text" 
-                      id="location" 
-                      name="location" 
-                      value={formData.location} 
+                    <input
+                      type="text"
+                      id="location"
+                      name="location"
+                      value={formData.location}
                       onChange={handleChange}
-                      required 
+                      required
                       placeholder="e.g., Taj Palace, New Delhi"
                       className="w-full px-4 py-3.5 bg-[#FAF8F5] border border-beige-soft/40 rounded-xl font-sans text-sm focus:outline-none focus:border-gold-accent focus:bg-white transition-colors"
                     />
@@ -241,11 +241,11 @@ const Contact = () => {
                   {/* Message */}
                   <div className="space-y-1.5">
                     <label htmlFor="message" className="block text-xs font-semibold text-gray-500 uppercase tracking-wider font-sans">Special requests or details</label>
-                    <textarea 
-                      id="message" 
-                      name="message" 
+                    <textarea
+                      id="message"
+                      name="message"
                       rows="4"
-                      value={formData.message} 
+                      value={formData.message}
                       onChange={handleChange}
                       placeholder="Share details like design preferences, side elements, or how many guests need mehndi..."
                       className="w-full px-4 py-3.5 bg-[#FAF8F5] border border-beige-soft/40 rounded-xl font-sans text-sm focus:outline-none focus:border-gold-accent focus:bg-white transition-colors resize-none"
@@ -261,7 +261,7 @@ const Contact = () => {
                       <Send className="w-4 h-4" />
                       Submit Inquiry
                     </button>
-                    
+
                     <button
                       type="button"
                       onClick={handleWhatsAppDirect}

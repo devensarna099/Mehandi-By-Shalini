@@ -1,5 +1,5 @@
 import React from 'react';
-import { Phone, MessageCircle } from 'lucide-react';
+import { Phone, MessageCircle, PhoneCall } from 'lucide-react';
 
 const FloatingButtons = () => {
   const phoneUrl = 'tel:+919074011621';
@@ -16,7 +16,7 @@ const FloatingButtons = () => {
           title="Call Now"
           aria-label="Call Now"
         >
-          <Phone className="w-5 h-5 animate-pulse" />
+          <PhoneCall className="w-5 h-5 animate-pulse" />
         </a>
 
         {/* WhatsApp Button */}
