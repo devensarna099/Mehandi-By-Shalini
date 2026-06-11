@@ -1,4 +1,4 @@
 export const CONFIG = {
-  whatsappNumber: '918319916631',
-  whatsappBaseUrl: 'https://wa.me/918319916631',
+  whatsappNumber: '918319991631',
+  whatsappBaseUrl: 'https://wa.me/918319991631',
 };

@@ -8,7 +8,7 @@ const SchemaMarkup = () => {
     "image": "https://mehandibyshalini.netlify.app/assets/hero_bridal_mehndi.png",
     "@id": "https://mehandibyshalini.netlify.app/#localbusiness",
     "url": "https://mehandibyshalini.netlify.app/",
-    "telephone": "+918319916631",
+    "telephone": "+918319991631",
     "priceRange": "₹₹₹",
     "address": {
       "@type": "PostalAddress",
