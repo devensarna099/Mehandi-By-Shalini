@@ -256,14 +256,6 @@ const Contact = () => {
                   {/* Action Buttons */}
                   <div className="flex flex-col sm:flex-row gap-4 pt-2">
                     <button
-                      type="submit"
-                      className="flex-1 inline-flex items-center justify-center gap-2 bg-gold-gradient text-white py-3.5 rounded-xl font-sans text-sm font-semibold shadow-md active:scale-95 transition-all duration-300 cursor-pointer"
-                    >
-                      <Send className="w-4 h-4" />
-                      Submit Inquiry
-                    </button>
-
-                    <button
                       type="button"
                       onClick={handleWhatsAppDirect}
                       className="flex-1 inline-flex items-center justify-center gap-2 border-2 border-mehndi-green text-mehndi-green hover:bg-mehndi-green/5 py-3.5 rounded-xl font-sans text-sm font-semibold active:scale-95 transition-all duration-300 cursor-pointer"
