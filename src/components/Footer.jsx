@@ -1,5 +1,6 @@
 import React from 'react';
 import { Phone, MessageCircle } from 'lucide-react';
+import { CONFIG } from '../config';
 
 // Custom inline SVG components for brand logos (since Lucide removed brand icons)
 const InstagramIcon = ({ className }) => (
@@ -42,7 +43,7 @@ const Footer = () => {
     { name: 'About', href: '#about' },
     { name: 'Services', href: '#services' },
     { name: 'Gallery', href: '#gallery' },
-    { name: 'Process', href: '#process' },
+    { name: 'Products', href: '#products' },
     { name: 'FAQ', href: '#faq' },
     { name: 'Contact', href: '#contact' }
   ];
@@ -96,7 +97,7 @@ const Footer = () => {
                 <FacebookIcon className="w-4.5 h-4.5" />
               </a>
               <a 
-                href="https://wa.me/919074011621" 
+                href={CONFIG.whatsappBaseUrl} 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="w-9 h-9 rounded-full bg-white/10 text-white flex items-center justify-center hover:bg-gold-gradient hover:scale-110 transition-all duration-300"

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Phone, MapPin, Send, MessageSquare } from 'lucide-react';
+import { CONFIG } from '../config';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -47,7 +48,7 @@ const Contact = () => {
 
   const handleWhatsAppDirect = () => {
     const textMsg = `Hi Shalini, I am writing to inquire about a booking.\n\nName: ${formData.name}\nPhone: ${formData.phone}\nEvent Date: ${formData.date}\nLocation: ${formData.location}\nService: ${formData.service}\nMessage: ${formData.message}`;
-    const url = `https://wa.me/919074011621?text=${encodeURIComponent(textMsg)}`;
+    const url = `${CONFIG.whatsappBaseUrl}?text=${encodeURIComponent(textMsg)}`;
     window.open(url, '_blank');
   };
 

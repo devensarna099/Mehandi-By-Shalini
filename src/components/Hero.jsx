@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Send, Calendar, PhoneCall } from 'lucide-react';
 import heroImg from '../assets/hero_bridal_mehndi.png';
+import { CONFIG } from '../config';
 
 const Hero = () => {
   return (
@@ -43,7 +44,7 @@ const Hero = () => {
                 Book Now
               </a>
               <a
-                href="https://wa.me/919074011621?text=Hi%20Shalini%2C%20I%20would%20like%20to%20inquire%20about%20bridal%20mehndi%20booking."
+                href={`${CONFIG.whatsappBaseUrl}?text=Hi%20Shalini%2C%20I%20would%20like%20to%20inquire%20about%20bridal%20mehndi%20booking.`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-8 py-3.5 bg-white text-mehndi-green border-2 border-mehndi-green/30 hover:border-mehndi-green rounded-full font-sans text-base font-semibold shadow-sm hover:bg-beige-soft/10 active:scale-95 transition-all duration-300"

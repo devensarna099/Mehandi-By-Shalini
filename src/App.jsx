@@ -5,7 +5,7 @@ import About from './components/About';
 import Services from './components/Services';
 import Portfolio from './components/Portfolio';
 import WhyChooseUs from './components/WhyChooseUs';
-import BookingProcess from './components/BookingProcess';
+import ProductShowcase from './components/ProductShowcase';
 import Testimonials from './components/Testimonials';
 import FAQ from './components/FAQ';
 import Contact from './components/Contact';
@@ -39,8 +39,8 @@ function App() {
         {/* Quality Value Prepositions */}
         <WhyChooseUs />
 
-        {/* Step-by-Step Interactive Booking Timeline */}
-        <BookingProcess />
+        {/* Premium Product Showcase / Shop Section */}
+        <ProductShowcase />
 
         {/* Client Bride Reviews Slider */}
         <Testimonials />

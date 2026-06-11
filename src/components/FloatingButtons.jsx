@@ -1,9 +1,10 @@
 import React from 'react';
 import { Phone, MessageCircle, PhoneCall } from 'lucide-react';
+import { CONFIG } from '../config';
 
 const FloatingButtons = () => {
   const phoneUrl = 'tel:+919074011621';
-  const whatsappUrl = 'https://wa.me/919074011621';
+  const whatsappUrl = CONFIG.whatsappBaseUrl;
 
   return (
     <>
