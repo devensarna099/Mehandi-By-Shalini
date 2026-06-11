@@ -3,7 +3,7 @@ import { Phone, MessageCircle, PhoneCall } from 'lucide-react';
 import { CONFIG } from '../config';
 
 const FloatingButtons = () => {
-  const phoneUrl = 'tel:+919074011621';
+  const phoneUrl = 'tel:+918319916631';
   const whatsappUrl = CONFIG.whatsappBaseUrl;
 
   return (

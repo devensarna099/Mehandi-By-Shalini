@@ -150,7 +150,7 @@ const Footer = () => {
                 📍 257/3 Mukharji Nagar, Indore, Madhya Pradesh 452015, India
               </p>
               <p className="flex items-center gap-2">
-                📞 +91 90740 11621
+                📞 +91 83199 16631
               </p>
               <p className="flex items-center gap-2">
                 ✉️ shalini@mehandibyshalini.com

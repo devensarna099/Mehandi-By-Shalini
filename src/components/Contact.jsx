@@ -96,7 +96,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <h4 className="font-serif text-sm font-semibold text-mehndi-dark">Call or Text</h4>
-                    <p className="font-sans text-sm text-gray-500 mt-0.5">+91 90740 11621</p>
+                    <p className="font-sans text-sm text-gray-500 mt-0.5">+91 83199 16631</p>
                   </div>
                 </div>
 

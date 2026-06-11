@@ -37,7 +37,7 @@ const Hero = () => {
             {/* Action Buttons */}
             <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
               <a
-                href="tel:+919074011621"
+                href="tel:+918319916631"
                 className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-8 py-3.5 bg-gold-gradient text-white rounded-full font-sans text-base font-semibold shadow-lg hover:shadow-gold-accent/30 hover:scale-105 active:scale-95 transition-all duration-300"
               >
                 <PhoneCall className="w-5 h-5" />
