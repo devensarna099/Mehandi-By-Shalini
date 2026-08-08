@@ -2,47 +2,22 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ShoppingBag, ArrowLeft, Plus, Minus, Check, Sparkles, MessageCircle } from 'lucide-react';
 import { CONFIG } from '../config';
-import { productsData } from '../data/products';
 
 const ProductDetail = ({ product, onClose }) => {
   const [quantity, setQuantity] = useState(1);
-  const [addedToCart, setAddedToCart] = useState(false);
+  const [selectedVariant, setSelectedVariant] = useState(null);
 
-  // Scroll to top when product changes
+  // Scroll to top and set default variant when product changes
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
     setQuantity(1);
-    setAddedToCart(false);
+    
+    if (product.variants && product.variants.length > 0) {
+      setSelectedVariant(product.variants[0]);
+    } else {
+      setSelectedVariant(null);
+    }
   }, [product]);
-
-  // Find other size/weight variants of the same product
-  const getVariants = () => {
-    // Helper to find size terms in names
-    const sizeRegex = /(\d+\s*(?:kg|gm|ml|ltr|piece|pieces|qty))/i;
-    const match = product.name.match(sizeRegex);
-    if (!match) return [];
-
-    const sizeText = match[0];
-    // Create a base name by removing the size text and trailing dashes/parentheses
-    const baseName = product.name
-      .replace(sizeText, '')
-      .replace(/\(\s*\)/g, '')
-      .replace(/-\s*$/g, '')
-      .trim();
-
-    // Find other products that contain this base name (excluding current product)
-    return productsData.filter(p => 
-      p.id !== product.id && 
-      p.name.toLowerCase().includes(baseName.toLowerCase().split(' ')[0]) && // match first word at least
-      (p.name.toLowerCase().includes('kg') || 
-       p.name.toLowerCase().includes('gm') || 
-       p.name.toLowerCase().includes('ml') || 
-       p.name.toLowerCase().includes('ltr') || 
-       p.name.toLowerCase().includes('piece'))
-    ).slice(0, 4); // Limit to 4 options
-  };
-
-  const variants = getVariants();
 
   const handleQuantityChange = (type) => {
     if (type === 'inc') {
@@ -52,15 +27,19 @@ const ProductDetail = ({ product, onClose }) => {
     }
   };
 
+  const currentPrice = selectedVariant ? selectedVariant.price : product.price;
+  const currentOriginalPrice = selectedVariant ? selectedVariant.originalPrice : product.originalPrice;
+
   const handleBuyNow = () => {
-    const totalAmount = product.price * quantity;
-    const message = `Hi, I’m interested in purchasing ${quantity}x ${product.name} (₹${product.price} each). Total: ₹${totalAmount}. Please share the details and ordering process.`;
+    const totalAmount = currentPrice * quantity;
+    const variantText = selectedVariant ? ` - ${selectedVariant.size}` : '';
+    const message = `Hi, I’m interested in purchasing ${quantity}x ${product.name}${variantText} (₹${currentPrice} each). Total: ₹${totalAmount}. Please share the details and ordering process.`;
     const whatsappUrl = `${CONFIG.whatsappBaseUrl}?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
   };
 
-  const discountPercent = product.originalPrice 
-    ? Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)
+  const discountPercent = currentOriginalPrice 
+    ? Math.round(((currentOriginalPrice - currentPrice) / currentOriginalPrice) * 100)
     : null;
 
   return (
@@ -132,15 +111,15 @@ const ProductDetail = ({ product, onClose }) => {
             {/* Price display */}
             <div className="flex items-baseline gap-4 mb-6">
               <span className="text-2xl sm:text-3xl font-extrabold text-mehndi-green">
-                ₹{product.price}
+                ₹{currentPrice}
               </span>
-              {product.originalPrice && (
+              {currentOriginalPrice && (
                 <>
                   <span className="text-lg text-gray-400 line-through">
-                    ₹{product.originalPrice}
+                    ₹{currentOriginalPrice}
                   </span>
                   <span className="text-xs font-bold text-gold-accent bg-gold-accent/10 px-2.5 py-1 rounded">
-                    Save ₹{product.originalPrice - product.price}
+                    Save ₹{currentOriginalPrice - currentPrice}
                   </span>
                 </>
               )}
@@ -173,18 +152,22 @@ const ProductDetail = ({ product, onClose }) => {
             </div>
 
             {/* Product options/variants if found */}
-            {variants.length > 0 && (
+            {product.variants && product.variants.length > 0 && (
               <div className="mb-8">
                 <h3 className="text-sm font-bold text-mehndi-dark uppercase tracking-wider mb-3">Available Options</h3>
                 <div className="flex flex-wrap gap-2.5">
-                  {variants.map(v => (
-                    <a
+                  {product.variants.map(v => (
+                    <button
                       key={v.id}
-                      href={`#/product/${v.id}`}
-                      className="px-4 py-2 bg-white hover:bg-beige-soft/10 border border-beige-soft/40 hover:border-gold-accent rounded-xl text-xs font-semibold text-mehndi-dark hover:text-gold-accent transition-all duration-200"
+                      onClick={() => setSelectedVariant(v)}
+                      className={`px-4 py-2 border rounded-xl text-xs font-semibold transition-all duration-200 cursor-pointer ${
+                        selectedVariant && selectedVariant.id === v.id
+                          ? 'bg-mehndi-green text-white border-mehndi-green shadow-sm'
+                          : 'bg-white text-mehndi-dark border-beige-soft/40 hover:border-gold-accent hover:text-gold-accent'
+                      }`}
                     >
-                      {v.name.split(' ').filter(word => word.match(/(\d+|kg|gm|ml|ltr|piece|qty)/i)).join(' ') || v.name} - ₹{v.price}
-                    </a>
+                      {v.size} - ₹{v.price}
+                    </button>
                   ))}
                 </div>
               </div>
@@ -216,13 +199,13 @@ const ProductDetail = ({ product, onClose }) => {
                 </button>
               </div>
 
-              {/* Buy Now WhatsApp Button */}
+              {/* Buy Now Button */}
               <button
                 onClick={handleBuyNow}
                 className="w-full sm:flex-grow inline-flex items-center justify-center gap-3 bg-mehndi-green hover:bg-gold-gradient text-white px-8 py-3.5 rounded-full font-sans text-base font-bold shadow-lg shadow-mehndi-green/10 hover:shadow-gold-accent/20 active:scale-95 transition-all duration-300 cursor-pointer"
               >
                 <MessageCircle className="w-5 h-5" />
-                Buy Now via WhatsApp (₹{product.price * quantity})
+                Buy Now (₹{currentPrice * quantity})
               </button>
 
             </div>
