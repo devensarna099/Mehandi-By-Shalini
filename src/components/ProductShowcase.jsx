@@ -7,21 +7,13 @@ const categories = ['All', 'Henna Powder', 'Henna Oil', 'After Care', 'Accessori
 
 const ProductShowcase = () => {
   const [activeCategory, setActiveCategory] = useState('All');
-  const [visibleCount, setVisibleCount] = useState(8);
 
   const filteredProducts = activeCategory === 'All'
     ? productsData
     : productsData.filter(product => product.category === activeCategory);
 
-  const visibleProducts = filteredProducts.slice(0, visibleCount);
-
   const handleCategoryChange = (category) => {
     setActiveCategory(category);
-    setVisibleCount(8); // Reset count when changing categories
-  };
-
-  const handleLoadMore = () => {
-    setVisibleCount(prev => prev + 8);
   };
 
   const handleCardClick = (productId) => {
@@ -75,8 +67,9 @@ const ProductShowcase = () => {
           className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-6 md:gap-8"
         >
           <AnimatePresence mode="popLayout">
-            {visibleProducts.map((product) => {
-              const discountPercent = product.originalPrice 
+            {filteredProducts.map((product) => {
+              const hasDiscount = product.originalPrice && product.originalPrice > product.price;
+              const discountPercent = hasDiscount 
                 ? Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)
                 : null;
 
@@ -136,13 +129,20 @@ const ProductShowcase = () => {
                     <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mt-auto pt-3 sm:pt-4 border-t border-beige-soft/20 gap-2.5 sm:gap-3">
                       <div className="flex justify-between items-center sm:flex-col sm:items-start leading-none">
                         <span className="text-[9px] sm:text-[10px] text-gray-400 font-sans block mb-1">Price</span>
-                        <div className="flex items-baseline gap-1 sm:gap-1.5">
-                          <span className="font-sans text-sm sm:text-base md:text-lg font-bold text-mehndi-dark">
-                            ₹{product.price}
-                          </span>
-                          {product.originalPrice && (
-                            <span className="font-sans text-[10px] sm:text-xs text-gray-400 line-through">
-                              ₹{product.originalPrice}
+                        <div className="flex flex-col sm:items-start gap-1">
+                          <div className="flex items-baseline gap-1.5">
+                            <span className="font-sans text-sm sm:text-base md:text-lg font-bold text-mehndi-dark">
+                              ₹{product.price}
+                            </span>
+                            {hasDiscount && (
+                              <span className="font-sans text-[10px] sm:text-xs text-gray-400 line-through">
+                                ₹{product.originalPrice}
+                              </span>
+                            )}
+                          </div>
+                          {hasDiscount && (
+                            <span className="text-[10px] font-bold text-gold-accent block">
+                              {discountPercent}% OFF
                             </span>
                           )}
                         </div>
@@ -162,19 +162,6 @@ const ProductShowcase = () => {
             })}
           </AnimatePresence>
         </motion.div>
-
-        {/* Load More Button */}
-        {visibleCount < filteredProducts.length && (
-          <div className="text-center mt-12">
-            <button
-              onClick={handleLoadMore}
-              className="inline-flex items-center gap-2 bg-white border border-mehndi-green text-mehndi-green hover:bg-mehndi-green hover:text-white px-6 py-3 rounded-full font-sans text-sm font-bold shadow-sm transition-all duration-300 cursor-pointer active:scale-95"
-            >
-              Load More Products
-              <ArrowRight className="w-4 h-4" />
-            </button>
-          </div>
-        )}
 
       </div>
     </section>

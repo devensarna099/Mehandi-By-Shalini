@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { ShoppingBag, ArrowLeft, Plus, Minus, Check, Sparkles, MessageCircle } from 'lucide-react';
+import { ArrowLeft, Plus, Minus, Check, Sparkles, MessageCircle, ChevronLeft, ChevronRight } from 'lucide-react';
 import { CONFIG } from '../config';
 
 const ProductDetail = ({ product, onClose }) => {
   const [quantity, setQuantity] = useState(1);
   const [selectedVariant, setSelectedVariant] = useState(null);
+  const [activeImageIndex, setActiveImageIndex] = useState(0);
 
   // Scroll to top and set default variant when product changes
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
     setQuantity(1);
+    setActiveImageIndex(0);
     
     if (product.variants && product.variants.length > 0) {
       setSelectedVariant(product.variants[0]);
@@ -38,9 +40,17 @@ const ProductDetail = ({ product, onClose }) => {
     window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
   };
 
-  const discountPercent = currentOriginalPrice 
+  const hasDiscount = currentOriginalPrice && currentOriginalPrice > currentPrice;
+  const discountPercent = hasDiscount 
     ? Math.round(((currentOriginalPrice - currentPrice) / currentOriginalPrice) * 100)
     : null;
+
+  const hasGallery = product.images && product.images.length > 1;
+  const currentImage = (selectedVariant && selectedVariant.image)
+    ? selectedVariant.image
+    : (product.images && product.images.length > 0)
+      ? product.images[activeImageIndex]
+      : product.image;
 
   return (
     <motion.div 
@@ -78,11 +88,58 @@ const ProductDetail = ({ product, onClose }) => {
             )}
             
             <img 
-              src={product.image} 
+              src={currentImage} 
               alt={product.name} 
-              className="w-full h-full object-cover rounded-2xl transition-transform duration-500 group-hover:scale-105"
+              className="w-full h-full object-cover rounded-2xl transition-transform duration-500"
             />
+
+            {hasGallery && (
+              <>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setActiveImageIndex(prev => (prev === 0 ? product.images.length - 1 : prev - 1));
+                  }}
+                  className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white text-mehndi-dark p-2 rounded-full shadow-md hover:scale-105 active:scale-95 transition-all cursor-pointer z-10 flex items-center justify-center border border-beige-soft/30"
+                  aria-label="Previous image"
+                >
+                  <ChevronLeft className="w-5 h-5" />
+                </button>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setActiveImageIndex(prev => (prev === product.images.length - 1 ? 0 : prev + 1));
+                  }}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white text-mehndi-dark p-2 rounded-full shadow-md hover:scale-105 active:scale-95 transition-all cursor-pointer z-10 flex items-center justify-center border border-beige-soft/30"
+                  aria-label="Next image"
+                >
+                  <ChevronRight className="w-5 h-5" />
+                </button>
+              </>
+            )}
           </div>
+
+          {hasGallery && (
+            <div className="flex flex-wrap gap-2.5 mt-2">
+              {product.images.map((img, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => setActiveImageIndex(idx)}
+                  className={`w-16 h-16 sm:w-20 sm:h-20 border-2 rounded-2xl overflow-hidden cursor-pointer transition-all duration-200 flex-shrink-0 ${
+                    activeImageIndex === idx
+                      ? 'border-mehndi-green shadow-md scale-95'
+                      : 'border-beige-soft/40 hover:border-gold-accent/60'
+                  }`}
+                >
+                  <img 
+                    src={img} 
+                    alt={`${product.name} preview ${idx + 1}`} 
+                    className="w-full h-full object-cover" 
+                  />
+                </button>
+              ))}
+            </div>
+          )}
 
           <div className="bg-[#FAF7F2] border border-gold-accent/20 rounded-2xl p-4 flex items-start gap-3">
             <Sparkles className="w-5 h-5 text-gold-accent flex-shrink-0 mt-0.5" />
@@ -113,12 +170,15 @@ const ProductDetail = ({ product, onClose }) => {
               <span className="text-2xl sm:text-3xl font-extrabold text-mehndi-green">
                 ₹{currentPrice}
               </span>
-              {currentOriginalPrice && (
+              {hasDiscount && (
                 <>
                   <span className="text-lg text-gray-400 line-through">
                     ₹{currentOriginalPrice}
                   </span>
                   <span className="text-xs font-bold text-gold-accent bg-gold-accent/10 px-2.5 py-1 rounded">
+                    {discountPercent}% OFF
+                  </span>
+                  <span className="text-xs font-bold text-mehndi-green bg-mehndi-green/10 px-2.5 py-1 rounded">
                     Save ₹{currentOriginalPrice - currentPrice}
                   </span>
                 </>
