@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Sparkles, Eye, ArrowRight } from 'lucide-react';
+import { Sparkles, Eye } from 'lucide-react';
 import { productsData } from '../data/products';
 
 const categories = ['All', 'Henna Powder', 'Henna Oil', 'After Care', 'Accessories', 'Mehandi Combo', 'Other'];
@@ -16,8 +16,11 @@ const ProductShowcase = () => {
     setActiveCategory(category);
   };
 
-  const handleCardClick = (productId) => {
+  const handleCardClick = (e, productId) => {
+    e.preventDefault();
+    window.history.pushState(null, '', `/product/${productId}`);
     window.location.hash = `#/product/${productId}`;
+    window.dispatchEvent(new Event('popstate'));
   };
 
   return (
@@ -40,7 +43,7 @@ const ProductShowcase = () => {
             <span className="text-gold-accent">🌿</span>
           </div>
           <p className="font-sans text-gray-600 text-sm sm:text-base leading-relaxed">
-            Premium-quality mehndi products crafted for rich color, long-lasting stain, and beautiful celebrations.
+            Premium-quality organic mehndi products crafted for rich color, long-lasting stain, and beautiful celebrations.
           </p>
         </div>
 
@@ -61,7 +64,7 @@ const ProductShowcase = () => {
           ))}
         </div>
 
-        {/* Products Grid - Modified to support 2-column mobile layout */}
+        {/* Products Grid */}
         <motion.div 
           layout
           className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-6 md:gap-8"
@@ -74,15 +77,16 @@ const ProductShowcase = () => {
                 : null;
 
               return (
-                <motion.div
+                <motion.a
                   key={product.id}
                   layout
+                  href={`/product/${product.id}`}
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.95 }}
                   transition={{ duration: 0.3 }}
-                  onClick={() => handleCardClick(product.id)}
-                  className="bg-white rounded-2xl sm:rounded-3xl border border-beige-soft/40 overflow-hidden shadow-sm hover:shadow-xl hover:shadow-mehndi-green/5 transition-all duration-300 group flex flex-col h-full cursor-pointer select-none"
+                  onClick={(e) => handleCardClick(e, product.id)}
+                  className="bg-white rounded-2xl sm:rounded-3xl border border-beige-soft/40 overflow-hidden shadow-sm hover:shadow-xl hover:shadow-mehndi-green/5 transition-all duration-300 group flex flex-col h-full cursor-pointer select-none no-underline block"
                 >
                   {/* 1:1 Image Container */}
                   <div className="relative aspect-square w-full overflow-hidden bg-beige-soft/10">
@@ -94,7 +98,7 @@ const ProductShowcase = () => {
 
                     <img
                       src={product.image}
-                      alt={product.name}
+                      alt={`${product.name} - Mehandi By Shalini`}
                       loading="lazy"
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                     />
@@ -106,7 +110,7 @@ const ProductShowcase = () => {
                         {product.description}
                       </p>
                       <span className="text-[9px] uppercase tracking-wider text-gold-accent font-semibold">
-                        Organic & Authentic
+                        Organic &amp; Authentic
                       </span>
                     </div>
                   </div>
@@ -148,7 +152,7 @@ const ProductShowcase = () => {
                         </div>
                       </div>
 
-                      {/* View Details Action - Styled Span to prevent nested anchor tag issues */}
+                      {/* View Details Action */}
                       <span
                         className="inline-flex items-center justify-center gap-1.5 bg-mehndi-green hover:bg-gold-gradient text-white hover:text-white px-3 py-2 sm:px-4 sm:py-2 rounded-full font-sans text-[10px] sm:text-xs font-bold shadow-md active:scale-95 transition-all duration-300 cursor-pointer"
                       >
@@ -157,7 +161,7 @@ const ProductShowcase = () => {
                       </span>
                     </div>
                   </div>
-                </motion.div>
+                </motion.a>
               );
             })}
           </AnimatePresence>

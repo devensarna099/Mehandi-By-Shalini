@@ -12,43 +12,63 @@ import FAQ from './components/FAQ';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import FloatingButtons from './components/FloatingButtons';
-import SchemaMarkup from './components/SchemaMarkup';
+import SeoHead from './components/SeoHead';
 import { productsData } from './data/products';
 
 function App() {
   const [selectedProduct, setSelectedProduct] = useState(null);
 
   useEffect(() => {
-    const handleHashChange = () => {
+    const handleRouteCheck = () => {
+      // 1. Check path routing first (/product/:id)
+      const pathname = window.location.pathname;
+      if (pathname.startsWith('/product/')) {
+        const productId = pathname.replace('/product/', '').replace(/\/$/, '');
+        const found = productsData.find(p => p.id === productId);
+        if (found) {
+          setSelectedProduct(found);
+          window.scrollTo(0, 0);
+          return;
+        }
+      }
+
+      // 2. Check hash routing next (#/product/:id)
       const hash = window.location.hash;
       if (hash.startsWith('#/product/')) {
         const productId = hash.replace('#/product/', '');
         const found = productsData.find(p => p.id === productId);
         if (found) {
           setSelectedProduct(found);
-          // Scroll to top of window when viewing detail page
           window.scrollTo(0, 0);
           return;
         }
       }
+
       setSelectedProduct(null);
     };
 
-    window.addEventListener('hashchange', handleHashChange);
-    handleHashChange(); // Check on initial page load
+    window.addEventListener('popstate', handleRouteCheck);
+    window.addEventListener('hashchange', handleRouteCheck);
+    handleRouteCheck(); // Check on initial page load
 
-    return () => window.removeEventListener('hashchange', handleHashChange);
+    return () => {
+      window.removeEventListener('popstate', handleRouteCheck);
+      window.removeEventListener('hashchange', handleRouteCheck);
+    };
   }, []);
 
   const closeProductDetail = () => {
-    // Navigate back to the products section on the home page
+    if (window.location.pathname.startsWith('/product/')) {
+      window.history.pushState(null, '', '/#products');
+    }
     window.location.hash = '#products';
+    setSelectedProduct(null);
   };
 
   return (
     <div className="min-h-screen flex flex-col bg-[#FDFAF6] selection:bg-gold-accent/30 selection:text-mehndi-dark">
-      {/* Local Business JSON-LD SEO Schema Injection */}
-      <SchemaMarkup />
+      {/* Dynamic Technical SEO Head & JSON-LD Structured Data */}
+      <SeoHead product={selectedProduct} />
 
       {/* Sticky Navigation */}
       <Navbar />
@@ -59,7 +79,7 @@ function App() {
           /* Dedicated Product Detail Page */
           <ProductDetail product={selectedProduct} onClose={closeProductDetail} />
         ) : (
-          /* Homepage Flow in the requested order: Hero -> Products -> About -> Remaining */
+          /* Homepage Flow */
           <>
             {/* Hero Banner Area */}
             <Hero />

@@ -22,12 +22,12 @@ const Hero = () => {
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
             <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold tracking-wider uppercase bg-gold-accent/15 text-gold-accent border border-gold-accent/20 mb-6">
-              ✨ Traditional Bridal Artistry
+              ✨ Mehandi By Shalini • Traditional Artistry
             </span>
 
             <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold text-mehndi-dark leading-[1.15] mb-6">
-              Premium Bridal <br />
-              <span className="text-gold-gradient font-semibold">Mehndi Artist</span> in India
+              Mehandi By Shalini <br />
+              <span className="text-gold-gradient font-semibold">Mehndi Products &amp; Artist</span>
             </h1>
 
             <p className="font-sans text-base sm:text-lg text-gray-600 max-w-xl mx-auto lg:mx-0 mb-8 leading-relaxed">

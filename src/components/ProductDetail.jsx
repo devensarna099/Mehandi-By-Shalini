@@ -89,7 +89,7 @@ const ProductDetail = ({ product, onClose }) => {
             
             <img 
               src={currentImage} 
-              alt={product.name} 
+              alt={`${product.name} - Mehandi By Shalini`} 
               className="w-full h-full object-cover rounded-2xl transition-transform duration-500"
             />
 
